@@ -1,11 +1,11 @@
-﻿public class ViewData
+public class ViewData
 {
 
     public static void ViewAllPosts()
     {
         using (var context = new MyDbContext())
         {
-            // Realizar una consulta LINQ
+            // Consulta LINQ
             var todosLosPosts = context.Posts.ToList();
 
             Console.WriteLine($"Total de registros: {todosLosPosts.Count}");
@@ -19,7 +19,7 @@
     {
         using (var context = new MyDbContext())
         {
-            // Realizar una consulta LINQ con OrderBy
+            // Consulta LINQ con OrderBy
             var orderedPosts = context.Posts.OrderBy(post => post.Date).ToList();
 
             Console.WriteLine("Esta ordenando desde mas antiguo a mas actual");
@@ -61,9 +61,9 @@
     {
         using (var context = new MyDbContext())
         {
-            // Realizar una consulta LINQ con WHERE, GROUP BY y ORDER BY
+            // Consulta LINQ con WHERE, GROUP BY y ORDER BY
             var postTotalsByAuthor = context.Posts
-                .Where(post => post.Date.Year == 2023) // Filtro con WHERE, por ejemplo, para obtener posts del año 2023
+                .Where(post => post.Date.Year == 2023) // Filtro con WHERE
                 .GroupBy(post => post.Author)
                 .OrderByDescending(group => group.Count()) // Ordenar por la cantidad de posts en orden descendente
                 .Select(group => new { Author = group.Key, TotalPosts = group.Count() })
